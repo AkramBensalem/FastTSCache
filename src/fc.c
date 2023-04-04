@@ -115,7 +115,7 @@ static void
 fc_show_usage(void)
 {
     log_stderr(
-        "Usage: fatcache [-?hVdS] [-o output file] [-v verbosity level]" CRLF
+        "Usage: [-?hVdS] [-o output file] [-v verbosity level]" CRLF
         "           [-p port] [-a addr] [-e hash power]" CRLF
         "           [-f factor] [-n min item chunk size] [-I slab size]" CRLF
         "           [-i max index memory[ [-m max slab memory]" CRLF
@@ -595,30 +595,30 @@ fc_parse_profile(void)
 
         status = fc_atou32(ptr, len, &item_sz);
         if (status < 0) {
-            log_stderr("fatcache: '%.*s' is not a valid number", len, ptr);
+            log_stderr("'%.*s' is not a valid number", len, ptr);
             return FC_ERROR;
         }
 
         if (item_sz % FC_ALIGNMENT != 0) {
-            log_stderr("fatcache: item chunk size must be %zu bytes aligned",
+            log_stderr("Item chunk size must be %zu bytes aligned",
                        FC_ALIGNMENT);
             return FC_ERROR;
         }
 
         if (item_sz < ITEM_MIN_CHUNK_SIZE) {
-            log_stderr("fatcache: item chunk size cannot be less than %d "
+            log_stderr("Item chunk size cannot be less than %d "
                        "bytes", ITEM_MIN_CHUNK_SIZE);
             return FC_ERROR;
         }
 
         if (item_sz > slab_data_size()) {
-            log_stderr("fatcache: item chunk size cannot be more than %zu "
+            log_stderr("Item chunk size cannot be more than %zu "
                        "bytes", slab_data_size());
             return FC_ERROR;
         }
 
         if (id > SLABCLASS_MIN_ID && item_sz <= profile[id - 1]) {
-            log_stderr("fatcache: item chunk sizes must be ascending and "
+            log_stderr("Item chunk sizes must be ascending and "
                        "> %zu bytes apart", FC_ALIGNMENT);
             return FC_ERROR;
         }
@@ -628,7 +628,7 @@ fc_parse_profile(void)
     }
 
     if (!eos) {
-        log_stderr("fatcache: too many sizes, keep it under %d",
+        log_stderr("Too many sizes, keep it under %d",
                    SLABCLASS_MAX_IDS);
         return FC_ERROR;
     }
