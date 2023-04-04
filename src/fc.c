@@ -102,6 +102,15 @@ static char short_options[] =
     "s:" /* server instance id */
     ;
 
+
+fc_show_error_msg(void)
+{
+    log_stderr(
+            "An error Occur" CRLF
+            "Try again!"
+    );
+}
+
 static void
 fc_show_usage(void)
 {
@@ -700,7 +709,7 @@ main(int argc, char **argv)
 
     status = fc_get_options(argc, argv);
     if (status != FC_OK) {
-        fc_show_usage();
+        fc_show_error_msg();
         exit(1);
     }
 
