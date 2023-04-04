@@ -116,7 +116,7 @@ fc_show_usage(void)
     log_stderr(
         "Options:" CRLF
         "  -h, --help                  : this help" CRLF
-        "  -V, --version               : show version and exit" CRLF
+        "  -V, --version1               : show version and exit" CRLF
         "  -d, --daemonize             : run as a daemon" CRLF
         "  -S, --show-sizes            : print slab, item and index sizes and exit"
         "");
