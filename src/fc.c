@@ -330,7 +330,7 @@ fc_get_options(int argc, char **argv)
         case 'v':
             value = fc_atoi(optarg, strlen(optarg));
             if (value < 0) {
-                log_stderr("fatcache: option -v requires a number");
+                log_stderr("option -v requires a number");
                 return FC_ERROR;
             }
 
@@ -340,12 +340,12 @@ fc_get_options(int argc, char **argv)
         case 'p':
             value = fc_atoi(optarg, strlen(optarg));
             if (value <= 0) {
-                log_stderr("fatcache: option -p requires a non zero number");
+                log_stderr("option -p requires a non zero number");
                 return FC_ERROR;
             }
 
             if (!fc_valid_port(value)) {
-                log_stderr("fatcache: option -p value %d is not a valid port ",
+                log_stderr("option -p value %d is not a valid port ",
                            value);
             }
 
@@ -359,7 +359,7 @@ fc_get_options(int argc, char **argv)
         case 'e':
             value = fc_atoi(optarg, strlen(optarg));
             if (value <= 0) {
-                log_stderr("fatcache: option -e requires a positive number");
+                log_stderr("option -e requires a positive number");
                 return FC_ERROR;
             }
 
@@ -369,7 +369,7 @@ fc_get_options(int argc, char **argv)
         case 'f':
             settings.factor = atof(optarg);
             if (settings.factor <= 1.0) {
-                log_stderr("fatcache: factor must be greater than 1.0");
+                log_stderr("factor must be greater than 1.0");
                 return FC_ERROR;
             }
             break;
@@ -377,7 +377,7 @@ fc_get_options(int argc, char **argv)
         case 'n':
             value = fc_atoi(optarg, strlen(optarg));
             if (value <= 0) {
-                log_stderr("fatcache: option -n requires a non zero number");
+                log_stderr("option -n requires a non zero number");
                 return FC_ERROR;
             }
 
@@ -388,7 +388,7 @@ fc_get_options(int argc, char **argv)
             }
 
             if (value % FC_ALIGNMENT != 0) {
-                log_stderr("fatcache: minimum item chunk size must be %zu "
+                log_stderr("minimum item chunk size must be %zu "
                            "bytes aligned", FC_ALIGNMENT);
                 return FC_ERROR;
             }
@@ -399,20 +399,20 @@ fc_get_options(int argc, char **argv)
         case 'I':
             value = fc_atoi(optarg, strlen(optarg));
             if (value <= 0) {
-                log_stderr("fatcache: option -I requires a non zero number");
+                log_stderr("option -I requires a non zero number");
                 return FC_ERROR;
             }
 
             settings.slab_size = (size_t)value * MB;
 
             if (settings.slab_size < SLAB_MIN_SIZE) {
-                log_stderr("fatcache: slab size must be at least %zu bytes",
+                log_stderr("slab size must be at least %zu bytes",
                            SLAB_MIN_SIZE);
                 return FC_ERROR;
             }
 
             if (settings.slab_size > SLAB_MAX_SIZE) {
-                log_stderr("fatcache: slab size cannot be larger than %zu "
+                log_stderr("slab size cannot be larger than %zu "
                            "bytes", SLAB_MAX_SIZE);
                 return FC_ERROR;
             }
@@ -422,7 +422,7 @@ fc_get_options(int argc, char **argv)
         case 'i':
             value = fc_atoi(optarg, strlen(optarg));
             if (value <= 0) {
-                log_stderr("fatcache: option -i requires a non zero number");
+                log_stderr("option -i requires a non zero number");
                 return FC_ERROR;
             }
 
@@ -432,7 +432,7 @@ fc_get_options(int argc, char **argv)
         case 'm':
             value = fc_atoi(optarg, strlen(optarg));
             if (value <= 0) {
-                log_stderr("fatcache: option -m requires a non zero number");
+                log_stderr("option -m requires a non zero number");
                 return FC_ERROR;
             }
 
@@ -451,14 +451,14 @@ fc_get_options(int argc, char **argv)
         case 's':
             pos = strchr(optarg, '/');
             if (pos == NULL) {
-                log_stderr("fatcache: invalid server id format '%s'", optarg);
+                log_stderr("invalid server id format '%s'", optarg);
                 return FC_ERROR;
             }
             *pos = '\0';
 
             value = fc_atoi(optarg, strlen(optarg));
             if (value < 0) {
-                log_stderr("fatcache : server id is not a number '%s'", optarg);
+                log_stderr("server id is not a number '%s'", optarg);
                 return FC_ERROR;
             }
             settings.server_id = (uint32_t)value;
@@ -467,13 +467,13 @@ fc_get_options(int argc, char **argv)
 
             value = fc_atoi(optarg, strlen(optarg));
             if (value < 0) {
-                log_stderr("fatcache: number of server is not a number '%s'", optarg);
+                log_stderr("number of server is not a number '%s'", optarg);
                 return FC_ERROR;
             }
             settings.server_n = (uint32_t)value;
 
             if (settings.server_id >= settings.server_n) {
-                log_stderr("fatcache: server id must be less than number of server");
+                log_stderr("server id must be less than number of server");
                 return FC_ERROR;
             }
 
@@ -483,7 +483,7 @@ fc_get_options(int argc, char **argv)
             switch (optopt) {
             case 'o':
             case 'D':
-                log_stderr("fatcache: option -%c requires a file name", optopt);
+                log_stderr("option -%c requires a file name", optopt);
                 break;
 
             case 'v':
@@ -494,24 +494,24 @@ fc_get_options(int argc, char **argv)
             case 'I':
             case 'i':
             case 'm':
-                log_stderr("fatcache: option -%c requires a number", optopt);
+                log_stderr("option -%c requires a number", optopt);
                 break;
 
             case 'a':
             case 'z':
             case 's':
-                log_stderr("fatcache: option -%c requires a string", optopt);
+                log_stderr("option -%c requires a string", optopt);
                 break;
 
             default:
-                log_stderr("fatcache: invalid option -- '%c'", optopt);
+                log_stderr("invalid option -- '%c'", optopt);
                 break;
             }
 
             return FC_ERROR;
 
         default:
-            log_stderr("fatcache: invalid option -- '%c'", optopt);
+            log_stderr("invalid option -- '%c'", optopt);
             return FC_ERROR;
         }
     }
