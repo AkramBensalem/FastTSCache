@@ -2,7 +2,7 @@
 
 ## Overview
 
-FastTSCache is faste time series in-memory cache based on Twitter's FatCach
+FastTSCache is a faste time series in-memory cache based on Twitter's FatCach
 
 ## Build
 
